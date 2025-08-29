@@ -67,4 +67,36 @@ print("Stack after Pop: ", stack)
 isEmpty = not bool(stack)
 print("isEmpty: ", isEmpty)
 print("Size: ",len(stack))
+
+
+
+
+queue.append('A')
+queue.append('B')
+queue.append('C')
+print("Queue: ", queue)
+frontElement = queue[0]
+print("Peek: ", frontElement)
+poppedElement = queue.pop(0)
+print("Dequeue: ", poppedElement)
+print("Queue after Dequeue: ", queue)
+isEmpty = not bool(queue)
+print("isEmpty: ", isEmpty)
+print("Size: ", len(queue))
  
+
+
+def decerator(func):
+    def wrapper():
+        print("before")
+        samp()
+        print("after")
+    return wrapper
+
+
+
+@decerator
+def samp():
+    print("hello")
+
+samp()
