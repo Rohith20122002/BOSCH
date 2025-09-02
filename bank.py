@@ -10,6 +10,8 @@ class Bankaccount:
         if amount <= 0:
             raise ValueError("Deposit value should be positive")
         self.balance += amount
+        print("After deposit balance:",amount)
+        print("\n")
 
     def withdraw(self, amount):
         if amount <= 0:
@@ -17,9 +19,13 @@ class Bankaccount:
         if amount > self.balance:
             raise ValueError("Insufficient balance")
         self.balance -= amount
+        print("After withdraw balance:",amount)
 
     def get_balance(self):
+        b=self.balance
+        print("BANK BALANCE:",b)
         return self.balance
+        
 
     def __str__(self):
         return f"Account holder: {self.account_holder}, Account number: {self.account_number}, Account balance: {self.balance:.2f}"
@@ -49,11 +55,16 @@ class Fixed_deposit(Bankaccount):
     def __init__(self, account_number, account_holder, lockin_time, balance=0):
         super().__init__(account_number, account_holder, balance)
         self.lockin_time = lockin_time
-        self.creation_time = datetime.now()
+        self.creation_time = datetime(2024, 9, 1, 14, 30, 45)
+        print("\n")
+        print("Time when deposited is :",self.creation_time)
+        
 
     def withdraw(self, amount):
         if datetime.now() < self.creation_time + timedelta(days=self.lockin_time):
             raise ValueError("Cannot withdraw before lock-in period")
+        lt=self.creation_time + timedelta(days=self.lockin_time)
+        print("The time you can withdraw is:",lt)
         super().withdraw(amount)
 
 class Bank:
@@ -75,22 +86,25 @@ class Bank:
         from_account.withdraw(amount)
         to_account.deposit(amount)
 
-# Create bank instance
+
 bank = Bank()
 
-# Create accounts
-savings = Savingsaccount("787878", "Chris", interest_rate=5, balance=1000)
-current = Currentaccount(account_number="454545", account_holder="Ben", overdraft_limit=1000, balance=750)
-fixed = Fixed_deposit(account_number="666666", account_holder="Bob", lockin_time=0, balance=1000)  
 
-# Add accounts to bank
+savings = Savingsaccount("12343", account_holder="rohith", interest_rate=9, balance=1000)
+current = Currentaccount(account_number="76790", account_holder="sujan", overdraft_limit=2000, balance=900)
+fixed = Fixed_deposit(account_number="666666", account_holder="karthik", lockin_time=2, balance=300)  
+
+
 bank.add_account(savings)
 bank.add_account(fixed)
 bank.add_account(current)
-
-# Perform transfer
-bank.transfer_Account("666666", "454545", 200)
-
-# Print account details
+print("BEFORE TRANSFER \n")
 print(bank.get_account("666666"))
-print(bank.get_account("454545"))
+print(bank.get_account("12343"))
+
+bank.transfer_Account("666666", "12343", 200)
+
+
+print("AFTER TRANSFER\n")
+print(bank.get_account("666666"))
+print(bank.get_account("12343"))
