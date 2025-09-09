@@ -1,0 +1,49 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+    
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+
+    def reverse(self):
+        prev = None
+        current = self.head
+    
+        while current:
+            next_node = current.next  
+            current.next = prev       
+            prev = current             
+            current = next_node        
+        
+        self.head = prev  
+
+ll = SinglyLinkedList()
+ll.append(1)
+ll.append(2)
+ll.append(3)
+
+print("Original List:")
+ll.display()
+
+ll.reverse()
+print("Reversed List:")
+ll.display()

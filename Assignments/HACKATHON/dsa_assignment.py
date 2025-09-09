@@ -199,7 +199,16 @@ class BinarySearchTree:
      if node:
         print("preorder",node.value, end=" ")   
         bst._preorder(node.left)       
-        bst._preorder(node.right)       
+        bst._preorder(node.right) 
+    
+    def getheight(self):
+        return self._getHeight(self.root)
+
+    def _getHeight(self,node):
+     if node is None:
+        return -1
+     return 1 + max(bst._getHeight(node.left), bst._getHeight(node.right))
+      
         
 
 
@@ -211,6 +220,7 @@ print(bst.search(10))
 bst.preorder()
 bst.postorder()
 bst.inorder()
+print(bst.getheight())
 
 
 
