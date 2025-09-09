@@ -118,7 +118,7 @@ class SinglyLinkedList:
             current = current.next
         print("None")
 
-# Example usage:
+
 linked_list = SinglyLinkedList()
 linked_list.append(10)
 linked_list.append(20)
@@ -164,7 +164,7 @@ class BinarySearchTree:
         return self._search(self.root, value)
 
     def _search(self, node, value):
-        if node is None or node.value == value:
+        if node.value == value:
             return node is not None
         elif value < node.value:
             return self._search(node.left, value)
@@ -177,9 +177,9 @@ class BinarySearchTree:
         return self._inorder(self.root)
     def _inorder(self,node):
         if node:
-            bst._inorder(node.left)         # 1. Traverse left
-            print("inorder",node.value)   # 2. Visit root
-            bst._inorder(node.right)        # 3. Traverse right
+            bst._inorder(node.left)         
+            print(node.value)   
+            bst._inorder(node.right)        
  
     
 

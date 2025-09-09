@@ -59,7 +59,6 @@ class Fixed_deposit(Bankaccount):
         print("\n")
         print("Time when deposited is :",self.creation_time)
         
-
     def withdraw(self, amount):
         if datetime.now() < self.creation_time + timedelta(days=self.lockin_time):
             raise ValueError("Cannot withdraw before lock-in period")

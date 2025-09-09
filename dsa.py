@@ -2,80 +2,60 @@
 
 
 class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class linkedlist:
+    def __init__(self):
+        self.head = None
 
-    def __init__(self, key):
+    def insert(self,data):
+        new=Node(data)
+        if not self.head:
+            self.head=new
+            return
+        last=self.head
+        while last.next:
+            last=last.next
+        last.next=new
 
-        self.key = key
+    def print(self):
+        current=self.head
+        while current is not None:
+            print(current.data)
+            current=current.next
 
-        self.left = None
+    def target(self,data):
+        current=self.head
+        while current is not None:
+            if(data==current.data):
+                print("found")
+                return 
+            else:
+                print("not found")
+            current=current.next
+        
+    def ibeg(self,node):
+        new=Node(node)
+        new.next=self.head
+        self.head=new
 
-        self.right = None
+    def  iend(self,node):
+        new=Node(node)
+        current=self.head
+        while current.next is not None:
+            current =current.next
+        current.next=new
+        self.head=current
 
-def preorder(root):
 
-    if root:
+ll=linkedlist()
+ll.insert(10)
+ll.insert(20)
+ll.print()
+ll.target(10)
+ll.ibeg(20)
+ll.print()
+ll.iend(50)
+ll.print()
 
-        print(root.key, end=" ")   # 1. Visit root
-
-        preorder(root.left)        # 2. Traverse left
-
-        preorder(root.right)       # 3. Traverse right
-
-# Example Tree
-
-root = Node(1)
-
-root.left = Node(2)
-
-root.right = Node(3)
-
-root.left.left = Node(4)
-
-root.left.right = Node(5)
-
-root.right.left = Node(6)
-
-print("Preorder Traversal:")
-
-preorder(root)
-
- 
-
- 
-
- 
-def inorder(root):
-
-    if root:
-
-        inorder(root.left)         # 1. Traverse left
-
-        print(root.key, end=" ")   # 2. Visit root
-
-        inorder(root.right)        # 3. Traverse right
- 
-
- 
-print("Inorder Traversal:")
-
-inorder(root)
-
- 
-
- 
-def postorder(root):
-
-    if root:
-
-        postorder(root.left)        # 1. Traverse left
-
-        postorder(root.right)       # 2. Traverse right
-
-        print(root.key, end=" ")    # 3. Visit root
- 
-
-print("Postorder Traversal:")
-
-postorder(root)
-
- 
